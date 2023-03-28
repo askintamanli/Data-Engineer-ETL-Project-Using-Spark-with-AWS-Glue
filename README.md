@@ -108,7 +108,7 @@ Kernel : Spark
 
 ## 5.1 Okay, let’s write some PySpark code for transform the data. You can get the source "etl-project-transform-data.ipynb" file in this repo.
 
-'''
+```
 %idle_timeout 2880
 %glue_version 3.0
 %worker_type G.1X
@@ -126,7 +126,7 @@ glueContext = GlueContext(sc)
 spark = glueContext.spark_session
 job = Job(glueContext)
 
-'''
+```
 
 
 ## Let’s check our ‘transformed_bucket’.
