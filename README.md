@@ -46,7 +46,7 @@ Folder name : ‘transformed_data’
 
 ![3](https://user-images.githubusercontent.com/63555029/228255709-5f5314ac-807b-4273-8158-67033dbcbe46.png)
 
-## 2.4- We upload our data from local to ‘raw_data’ bucket. 
+## 2.4- We upload our data from local to ‘raw_data’ bucket. You can get the data from this repo.
 
 AWS S3 → Buckets → ‘etl-project-for-medium’ → ‘etl-project-for-medium-database’ → ‘raw_data’ → Upload → Add Files → ‘marketing_campaign.csv’
 
