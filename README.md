@@ -109,71 +109,70 @@ Kernel : Spark
 ## 5.1 Okay, let’s write some PySpark code for transform the data. You can get the source "etl-project-transform-data.ipynb" file in this repo.
 
 1. For set up and start your interactive session.
-  ```
-  %idle_timeout 2880
-  %glue_version 3.0
-  %worker_type G.1X
-  %number_of_workers 5
+   ```
+    %idle_timeout 2880
+    %glue_version 3.0
+    %worker_type G.1X
+    %number_of_workers 5
 
-  import sys
-  from awsglue.transforms import *
-  from awsglue.utils import getResolvedOptions
-  from pyspark.context import SparkContext
-  from awsglue.context import GlueContext
-  from awsglue.job import Job
+    import sys
+    from awsglue.transforms import *
+    from awsglue.utils import getResolvedOptions
+    from pyspark.context import SparkContext
+    from awsglue.context import GlueContext
+    from awsglue.job import Job
 
-  sc = SparkContext.getOrCreate()
-  glueContext = GlueContext(sc)
-  spark = glueContext.spark_session
-  job = Job(glueContext)
-
-  ```
+    sc = SparkContext.getOrCreate()
+    glueContext = GlueContext(sc)
+    spark = glueContext.spark_session
+    job = Job(glueContext)
+    ```
 2. Create a DynamicFrame from a table in the AWS Glue Data Catalog and display its schema.
-   ```
-   dyf = glueContext.create_dynamic_frame.from_catalog(database='etl-project-for-medium-database',          table_name='raw_data')
-   dyf.printSchema()
-   ```
+    ```
+    dyf = glueContext.create_dynamic_frame.from_catalog(database='etl-project-for-medium-database',            table_name='raw_data')
+    dyf.printSchema()
+    ```
 3. Convert the DynamicFrame to a Spark DataFrame and display a sample of the data.
-  ```
-  df = dyf.toDF()
-  df.show()
-  ```
+    ```
+    df = dyf.toDF()
+    df.show()
+    ```
 4. Drop columns that we don't need it.
-  ```
-  df = df["id","year_birth","education","marital_status","income","dt_customer"]
-  df.show()
-  ```
+    ```
+    df = df["id","year_birth","education","marital_status","income","dt_customer"]
+    df.show()
+    ```
 5. Check NaN values for each column.
-  ```
-  from pyspark.sql.functions import *
-  df.select([count(when(col(c).isNull(),c)).alias(c) for c in df.columns]).show()
-  ```
+    ```
+    from pyspark.sql.functions import *
+    df.select([count(when(col(c).isNull(),c)).alias(c) for c in df.columns]).show()
+    ```
 6. There are 24 NaN values in "income" column. Let's fill NaN values with mean.
-  ```
-  # Calculate the mean value of the column
-  mean_value = df.select(mean(col('income'))).collect()[0][0]
+    ```
+    # Calculate the mean value of the column
+    mean_value = df.select(mean(col('income'))).collect()[0][0]
 
-  # Fill missing values with the mean value
-  df = df.fillna(mean_value, subset=['income'])
+    # Fill missing values with the mean value
+    df = df.fillna(mean_value, subset=['income'])
 
-  # Check
-  df.select([count(when(col(c).isNull(),c)).alias(c) for c in df.columns]).show()
-  ```
+    # Check
+    df.select([count(when(col(c).isNull(),c)).alias(c) for c in df.columns]).show()
+    ```
 7. Write the data to our S3 Bucket named "transformed_data" as csv.
-  ```
-  df.write \
-    .format("csv") \
-    .mode("append") \
-    .option("header", "true") \
-    .save("s3://etl-project-for-medium/etl-project-for-medium-database/transformed_data/")
-  ```
+    ```
+    df.write \
+      .format("csv") \
+      .mode("append") \
+      .option("header", "true") \
+      .save("s3://etl-project-for-medium/etl-project-for-medium-database/transformed_data/")
+    ```
 8. Write the data to our S3 Bucket named "transformed_data" as json.
-   ```
-   df.write \
-    .format("json") \
-    .mode("append") \
-    .save("s3://etl-project-for-medium/etl-project-for-medium-database/transformed_data/")
-   ```
+     ```
+     df.write \
+      .format("json") \
+      .mode("append") \
+      .save("s3://etl-project-for-medium/etl-project-for-medium-database/transformed_data/")
+     ```
 
 
 
