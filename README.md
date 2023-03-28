@@ -6,9 +6,9 @@
 1. [Create IAM Role for whole project](#create-ıam-role-for-whole-project)
 2. [Create an S3 bucket and load data to the bucket from our local](#create-an-s3)
 3. [Create AWS Glue database and table](#create-aws-glue-database-and-table)
-5. [Main Tutorial](#main-tutorial)
-6. [Useful Links](#useful-links)
-7. [Creators](#creators)
+4. [Create Glue Studio Notebook](#create-glue-studio-notebook)
+5. [Transform data using Spark](#transform-data-using-spark)
+
 
 ## 1.1  Firstly we should create an IAM Role for whole project.
 Go to AWS IAM → Roles → Create Role
@@ -78,7 +78,8 @@ Target database → Choose the ‘etl-project-for-medium-database’
 
 Schedule : On demand
 
-![6](https://user-images.githubusercontent.com/63555029/228256510-a395159a-72bd-4ff7-8f39-cb12f67c38d2.png)
+![extra2](https://user-images.githubusercontent.com/63555029/228259725-eaa8a949-6345-4f20-bdc5-058e4676de8f.png)
+
 
 ## 3.3- Run the crawler.
 
@@ -92,4 +93,25 @@ AWS Glue → Data Catalog → Databases → ‘etl-project-for-medium-database�
 
 We just created our table. Check the data types of columns of data. Everything looks good in our table.
 
+## 4- Firstly we create ETL Job in AWS Glue.
+
+o to AWS Glue → Data Integration and ETL → Interactive Sessions → Notebooks
+
+Job name: ‘etl-project-for-medium-job’
+
+IAM Role → Choose the role that we created first episode of series → ‘’IAM-Role-etl-project’
+
+Kernel : Spark
+
+![1](https://user-images.githubusercontent.com/63555029/228258375-5680b1be-1b76-4eb6-b00e-bce0ed3b711f.png)
+
+
+## 5.1 Okay, let’s write some PySpark code for transform the data. Please check the "etl-project-transform-data.ipynb" file in this repo.
+
+
+## Let’s check our ‘transformed_bucket’.
+
+![3](https://user-images.githubusercontent.com/63555029/228259450-80d283e1-a6b2-406a-b150-b15dbec04de2.png)
+
+Everything looks good. Select the one of them and download. You will see the results.
 
