@@ -8,6 +8,8 @@
 3. [Create AWS Glue database and table](#create-aws-glue-database-and-table)
 4. [Create Glue Studio Notebook](#create-glue-studio-notebook)
 5. [Transform data using Spark](#transform-data-using-spark)
+6. [Create AWS Redshift Cluster](#create-aws-redshift-cluster)
+7. [Load the transformed data from S3 to Redshift](#load-the-transformed-data-from-s3-to-redshift)
 
 
 ## 1.1  Firstly we should create an IAM Role for whole project.
@@ -176,9 +178,100 @@ Kernel : Spark
 
 
 
-## Let’s check our ‘transformed_bucket’.
+## 5.2 Let’s check our ‘transformed_bucket’.
 
 ![3](https://user-images.githubusercontent.com/63555029/228259450-80d283e1-a6b2-406a-b150-b15dbec04de2.png)
 
 Everything looks good. Select the one of them and download. You will see the results.
 
+# PART-3-
+
+![Slide1](https://user-images.githubusercontent.com/63555029/228977183-c3091fb1-6e57-4608-bf88-d24807af46bd.jpg)
+
+## 6.1 We should create another IAM Role for Redshift.
+
+Go to AWS IAM → Roles → Create Role
+
+Use cases for other AWS services : Select Redshift - Customizable
+
+Add permissions → Search and Select 'AdministratorAccess'
+
+Role name : 'IAM-Role-etl-project-redshift'
+
+![extra](https://user-images.githubusercontent.com/63555029/228977738-f61c5f3b-bc19-4c4d-9a50-869e305646f3.png)
+
+
+## 6.2- Let's create AWS Redshift Cluster.
+
+Go to AWS Redshift → Clusters → Create cluster
+
+Cluster identifier : 'etl-project-cluster'
+
+Node type : dc2.large (lowest price for per node)
+
+Number of nodes : 1
+
+Mark the box that load sample data
+
+Configure the admin user name and password
+
+Associated IAM roles → Select 'IAM-Role-etl-project-redshift'
+
+![1](https://user-images.githubusercontent.com/63555029/228977775-6261a957-da08-4041-9317-e84476210d5d.png)
+
+
+## 6.3 We created a cluster. Let's view our database with editor.
+
+AWS Redshift → Cluster → 'etl-project-cluster' → Query Data v2
+
+![2](https://user-images.githubusercontent.com/63555029/228977819-75df9364-b1da-47ad-a744-ead14f27b940.png)
+
+'dev' and 'sample_data_dev' are database names. You can create notebook or editor page and you can run SQL codes.
+
+
+## 7.1 Everything looks good. Let's load transformed data from s3 to 'dev' database. Firstly, we should create a table. Let's write some SQL for create table.
+
+   ```
+   CREATE TABLE etl_project_transformed_data_table(
+   "id" INTEGER NULL,
+   "year_birth" INTEGER NULL,
+   "education" VARCHAR NULL,
+   "marital_status" VARCHAR NULL,
+   "income" INTEGER NULL,
+   "dt_customer" DATE NULL
+   ) ENCODE AUTO;
+   ```
+![3](https://user-images.githubusercontent.com/63555029/228978528-c2c266b4-1183-453d-a213-1a2fa31dddd5.png)
+
+## 7.2 Now, load the data.
+
+Copy the S3 URI of transformed data which csv, paste it to 'from' field
+
+Copy the ARN of IAM Role 'IAM-Role-etl-project-redshift', paste it IAM_ROLE field.
+
+   ```
+   COPY etl_project_transformed_data_table
+   FROM 's3://etl-project-for-medium/etl-project-for-medium-database/transformed_data/part-00000-6429f588-c5f4-4f6e-88df-b8bd3506113e-c000.csv'
+   IAM_ROLE 'arn:aws:iam::835769464848:role/IAM-Role-etl-project-redshift'
+   IGNOREHEADER 1
+   DELIMITER ',';
+   ```
+## 7.3 Let's check our table.
+
+   ```
+   SELECT * FROM etl_project_transformed_data_table
+   ```
+   
+![4](https://user-images.githubusercontent.com/63555029/228979014-87d30860-754e-4e6e-937a-029d326324e2.png)
+
+## 7.4 Cool. Let's query the data.
+
+   ```
+   SELECT education, COUNT(id), AVG(income)
+   FROM etl_project_transformed_data_table
+   GROUP BY education
+   ```
+   
+![5](https://user-images.githubusercontent.com/63555029/228979117-7e85568a-9ff8-443c-8e2f-930d5de922fd.png)
+
+## That's it. This is the end of this project series. I really appreciate you for reading this series.
