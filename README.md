@@ -11,6 +11,7 @@
 6. [Create AWS Redshift Cluster](#create-aws-redshift-cluster)
 7. [Load the transformed data from S3 to Redshift](#load-the-transformed-data-from-s3-to-redshift)
 
+# PART-1-EXTRACT
 
 ## 1.1  Firstly we should create an IAM Role for whole project.
 Go to AWS IAM → Roles → Create Role
@@ -94,6 +95,8 @@ AWS Glue → Data Catalog → Databases → ‘etl-project-for-medium-database�
 ![8](https://user-images.githubusercontent.com/63555029/228256846-6b620a1a-33ac-4edf-8276-d0a6b6faf950.png)
 
 We just created our table. Check the data types of columns of data. Everything looks good in our table.
+
+# PART-2-TRANSFORM
 
 ## 4- Firstly we create ETL Job in AWS Glue.
 
@@ -184,7 +187,7 @@ Kernel : Spark
 
 Everything looks good. Select the one of them and download. You will see the results.
 
-# PART-3-
+# PART-3-LOAD
 
 ![Slide1](https://user-images.githubusercontent.com/63555029/228977183-c3091fb1-6e57-4608-bf88-d24807af46bd.jpg)
 
