@@ -1,4 +1,4 @@
-# Data-Engineer-ETL-Project-Using-Spark-with-AWS-Glue
+![Slide1](https://github.com/askintamanli/Data-Engineer-ETL-Project-Using-Spark-with-AWS-Glue/assets/63555029/ef15870f-9acf-4731-ad5d-dc92ee8d9201)# Data-Engineer-ETL-Project-Using-Spark-with-AWS-Glue
 
 ## Hello everyone. Welcome my Data Engineer (ETL) project. We will talk about ETL job using Apache Spark with AWS Glue. You can also view the project in my medium account ([https://medium.com/@askintamanli](https://awstip.com/etl-project-using-spark-with-aws-glue-extract-step-1-3-8710ce27264b)). CAUTION!!! If you practice with me, it may cost much. Don’t save the job an delete the job after you done with it.
 
@@ -13,7 +13,10 @@
 
 # PART-1-EXTRACT
 
+![Slide1 1396](https://github.com/askintamanli/Data-Engineer-ETL-Project-Using-Spark-with-AWS-Glue/assets/63555029/d8aea115-9c32-42e7-bf9a-ffebf47e0230)
+
 ## 1.1  Firstly we should create an IAM Role for whole project.
+
 Go to AWS IAM → Roles → Create Role
 
 Use cases for other AWS services : Select Glue
@@ -97,6 +100,8 @@ AWS Glue → Data Catalog → Databases → ‘etl-project-for-medium-database�
 We just created our table. Check the data types of columns of data. Everything looks good in our table.
 
 # PART-2-TRANSFORM
+
+![Slide1](https://github.com/askintamanli/Data-Engineer-ETL-Project-Using-Spark-with-AWS-Glue/assets/63555029/8132c39b-994d-4b05-be82-0af06b6b23ae)
 
 ## 4- Firstly we create ETL Job in AWS Glue.
 
@@ -188,6 +193,8 @@ Kernel : Spark
 Everything looks good. Select the one of them and download. You will see the results.
 
 # PART-3-LOAD
+
+![Slide1](https://github.com/askintamanli/Data-Engineer-ETL-Project-Using-Spark-with-AWS-Glue/assets/63555029/cdc3b2af-5cba-43cf-a292-76038b24391c)
 
 ![Slide1](https://user-images.githubusercontent.com/63555029/228977183-c3091fb1-6e57-4608-bf88-d24807af46bd.jpg)
 
