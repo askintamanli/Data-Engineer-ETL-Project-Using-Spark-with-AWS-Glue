@@ -1,5 +1,3 @@
-![Slide1](https://github.com/askintamanli/Data-Engineer-ETL-Project-Using-Spark-with-AWS-Glue/assets/63555029/ef15870f-9acf-4731-ad5d-dc92ee8d9201)# Data-Engineer-ETL-Project-Using-Spark-with-AWS-Glue
-
 ## Hello everyone. Welcome my Data Engineer (ETL) project. We will talk about ETL job using Apache Spark with AWS Glue. You can also view the project in my medium account ([https://medium.com/@askintamanli](https://awstip.com/etl-project-using-spark-with-aws-glue-extract-step-1-3-8710ce27264b)). CAUTION!!! If you practice with me, it may cost much. Don’t save the job an delete the job after you done with it.
 
 ## What we gonna do step by step
@@ -193,8 +191,6 @@ Kernel : Spark
 Everything looks good. Select the one of them and download. You will see the results.
 
 # PART-3-LOAD
-
-![Slide1](https://github.com/askintamanli/Data-Engineer-ETL-Project-Using-Spark-with-AWS-Glue/assets/63555029/cdc3b2af-5cba-43cf-a292-76038b24391c)
 
 ![Slide1](https://user-images.githubusercontent.com/63555029/228977183-c3091fb1-6e57-4608-bf88-d24807af46bd.jpg)
 
