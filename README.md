@@ -1,5 +1,7 @@
 ## Hello everyone. Welcome my Data Engineer (ETL) project. We will talk about ETL job using Apache Spark with AWS Glue. You can also view the project in my medium account ([https://medium.com/@askintamanli](https://awstip.com/etl-project-using-spark-with-aws-glue-extract-step-1-3-8710ce27264b)). CAUTION!!! If you practice with me, it may cost much. Don’t save the job an delete the job after you done with it.
 
+![export](https://github.com/askintamanli/Data-Engineer-ETL-Project-Using-Spark-with-AWS-Glue/assets/63555029/b866df61-9b20-47db-a648-83fbb24e1974)
+
 ## What we gonna do step by step
 1. [Create IAM Role for whole project](#create-ıam-role-for-whole-project)
 2. [Create an S3 bucket and load data to the bucket from our local](#create-an-s3)
